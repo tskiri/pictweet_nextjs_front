@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import Header from '@/app/_components/Header';
 import Footer from '@/app/_components/Footer';
 import TweetForm from '@/app/_components/TweetForm';
+import AuthGuard from '@/app/_components/AuthGuard'; 
 
 interface TweetFormData {
   text: string;
@@ -27,7 +28,7 @@ const CreateTweetPage = () => {
   };
 
   return (
-    <>
+    <AuthGuard>
       <Header />
       <div className="contents row">
         <div className="container">
@@ -40,7 +41,7 @@ const CreateTweetPage = () => {
         </div>
       </div>
       <Footer />
-    </>
+    </AuthGuard>
   );
 };
 

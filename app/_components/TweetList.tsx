@@ -5,13 +5,14 @@ import Tweet  from '../_components/Tweet';
 
 interface TweetListProps {
   tweets: TweetData[];
+  onDeleteTweet: (tweetId: number) => Promise<void>;
 }
 
-const TweetList = ({ tweets }: TweetListProps) => {
+const TweetList = ({ tweets, onDeleteTweet }: TweetListProps) => {
   return (
     <div className="contents row">
       {tweets.map((tweet) => (
-        <Tweet key={tweet.id} tweet={tweet} />
+        <Tweet key={tweet.id} tweet={tweet} onDeleteTweet={onDeleteTweet} />
       ))}
     </div>
   );

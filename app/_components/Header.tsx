@@ -35,7 +35,7 @@ const Header = () => {
               <div>{user.nickname}</div>
               <ul className="user__info">
                 <li>
-                  <Link href={`/`}>マイページ</Link>
+                  <Link href={`/users/${user.id}`}>マイページ</Link>
                   <form onSubmit={handleLogout}>
                     <input className="logout-btn" type="submit" value="ログアウト" />
                   </form>

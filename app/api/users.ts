@@ -1,5 +1,6 @@
 import axios from 'axios';
 import qs from 'qs';
+import { TweetData } from '../_interfaces/TweetData';
 
 const api = axios.create({
   baseURL: 'http://localhost:8080/api',
@@ -16,6 +17,12 @@ interface SignUpForm {
 interface UserResponse {
   id: number;
   nickname: string;
+}
+
+interface UserTweetsResponse {
+  id: number;
+  nickname: string;
+  tweets: TweetData[];
 }
 
 interface LoginCredentials {
@@ -69,5 +76,18 @@ export const logout = async (): Promise<void> => {
       console.error('Logout error:', error.response?.data);
       throw new Error('ログアウトに失敗しました');
     }
+  }
+};
+
+export const findUserTweets = async (userId: number): Promise<UserTweetsResponse> => {
+  try {
+    const response = await api.get<UserTweetsResponse>(`/users/${userId}`);
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      console.error('APIリクエストエラー:', error.response?.data);
+      throw new Error('ユーザー情報の取得に失敗しました');
+    }
+    throw error;
   }
 };
