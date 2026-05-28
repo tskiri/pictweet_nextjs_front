@@ -41,7 +41,7 @@ const ShowTweetDetailPage = () => {
         } catch (error) {
           setTweet(null)
           console.error('ツイートの取得に失敗しました:', error)
-        } 
+        }       
       }
       setLoading(false)
     }
@@ -67,6 +67,7 @@ const ShowTweetDetailPage = () => {
       setErrorMessages([error instanceof Error ? error.message : 'エラーが発生しました']);
     }
   }
+
 
   if (loading) {
     return <div>Loading...</div>
@@ -113,5 +114,4 @@ const ShowTweetDetailPage = () => {
   )
 }
 
-export default ShowTweetDetailPage 
- 
+export default ShowTweetDetailPage
