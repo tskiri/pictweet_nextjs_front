@@ -10,6 +10,7 @@ import { CommentData } from '@/app/_interfaces/CommentData'
 import { useAuthContext } from '@/app/context/AuthContext'
 import { useParams, notFound, useRouter } from 'next/navigation'
 import { deleteTweet, findTweetById } from '@/app/api/tweets'
+import { createComment } from '@/app/api/comments';
 
 
 interface CommentFormData {
@@ -59,7 +60,12 @@ const ShowTweetDetailPage = () => {
 
   // コメントフォームのSENDボタンが押された時の処理
   const handleCommentSubmit = async (formData: CommentFormData) => {
-    
+    try {
+      const response = await createComment(Number(tweetId), formData);
+      setComments([ ...comments, response])
+    } catch (error) {
+      setErrorMessages([error instanceof Error ? error.message : 'エラーが発生しました']);
+    }
   }
 
   if (loading) {
